@@ -1,8 +1,23 @@
-const express = require("express");
-
+const express = require('express');
+const fs = require('fs');
 const app = express();
-app.get("/", function (req, res) {
-  res.send("Hello World");
+
+const tours = JSON.parse(
+  fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+);
+
+app.get('/api/v1/tours', (req, res) => {
+  res.status(200).json({
+    status: 'Success',
+    data: {
+      //tours: tours,
+
+      //in es6
+      tours,
+    },
+  });
 });
 
-app.listen(3000);
+app.listen(3000, () => {
+  console.log('server is running on port 3000');
+});
